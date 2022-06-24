@@ -1,0 +1,11 @@
+src/.vs/
+*.suo
+*.csproj.user
+*.vs
+obj/
+bin/
+hooks/
+lfs/
+src/Getinge.Tegris.Web.sln.DotSettings.user
+TestResults/
+/src/Getinge.Tegris.Web.UI/Logs
