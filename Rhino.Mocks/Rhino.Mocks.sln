@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhino.Mocks", "Rhino.Mocks.csproj", "{1D97AF6B-AF31-484B-8C15-FC742A63EF14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhino.Mocks.Tests", "..\Rhino.Mocks.Tests\Rhino.Mocks.Tests.csproj", "{0D557AB3-A19B-48C3-89BE-0A15E6D79598}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D97AF6B-AF31-484B-8C15-FC742A63EF14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D97AF6B-AF31-484B-8C15-FC742A63EF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D97AF6B-AF31-484B-8C15-FC742A63EF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D97AF6B-AF31-484B-8C15-FC742A63EF14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D557AB3-A19B-48C3-89BE-0A15E6D79598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D557AB3-A19B-48C3-89BE-0A15E6D79598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D557AB3-A19B-48C3-89BE-0A15E6D79598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D557AB3-A19B-48C3-89BE-0A15E6D79598}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B2F7F08-9AF9-4CE3-840E-43245C44449A}
+	EndGlobalSection
+EndGlobal
