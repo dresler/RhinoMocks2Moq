@@ -62,6 +62,37 @@ internal sealed class RhinoMockExtensionsTests
     }
 
     [Test]
+    public void Expect_ForActionWithArgAndIgnoredArguments_ShouldBehaveAsExpected()
+    {
+        var argument = AnyValueFactory.CreateAnyString();
+
+        _barMock
+            .Expect(x => x.ActionWithArg<string>(null!))
+            .IgnoreArguments();
+
+        _foo.BarActionWithArg(argument);
+
+        _barMock.VerifyAllExpectations();
+    }
+    
+    [Test]
+    public void Expect_ForActionWithArgAndWhenCalledAndIgnoredArguments_ShouldBehaveAsExpected()
+    {
+        var argument = AnyValueFactory.CreateAnyString();
+
+        var actionCalled = false;
+
+        _barMock
+            .Expect(x => x.ActionWithArg<string>(null!))
+            .WhenCalled(_ => actionCalled = true)
+            .IgnoreArguments();
+
+        _foo.BarActionWithArg(argument);
+
+        Assert.IsTrue(actionCalled);
+    }
+
+    [Test]
     public void Stub_ForFunc_ShouldBehaveAsExpected()
     {
         var expected = AnyValueFactory.CreateAnyString();
@@ -149,6 +180,8 @@ internal sealed class RhinoMockExtensionsTests
         public TResult BarFuncWithArg<TArgument, TResult>(TArgument arg) => _bar.FuncWithArg<TArgument, TResult>(arg);
             
         public void BarAction() => _bar.Action();
+        
+        public void BarActionWithArg<TArgument>(TArgument arg) => _bar.ActionWithArg(arg);
     }
 
     internal interface IBar
@@ -158,5 +191,7 @@ internal sealed class RhinoMockExtensionsTests
         TResult FuncWithArg<TArgument, TResult>(TArgument arg);
 
         void Action();
+        
+        void ActionWithArg<TArgument>(TArgument arg);
     }
 }

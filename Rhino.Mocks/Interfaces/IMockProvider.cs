@@ -1,6 +1,6 @@
 ﻿using Moq;
 
-namespace Rhino.Mocks;
+namespace Rhino.Mocks.Interfaces;
 
 internal interface INonTypedMockProvider
 {
