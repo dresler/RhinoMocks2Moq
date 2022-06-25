@@ -14,6 +14,13 @@ internal sealed class FuncOptions<T,R> : IMethodOptions<R>
         _setup = setup;
     }
 
+    public IMethodOptions<R> Throw(Exception exception)
+    {
+        _setup.Throws(exception);
+
+        return this;
+    }
+
     public IMethodOptions<R> Return(R objToReturn)
     {
         _setup.Returns(objToReturn);

@@ -14,6 +14,13 @@ internal sealed class ActionOptions<T> : IMethodOptions<object>
         _setup = setup ?? throw new ArgumentNullException(nameof(setup));
     }
 
+    public IMethodOptions<object> Throw(Exception exception)
+    {
+        _setup.Throws(exception);
+
+        return this;
+    }
+
     public IMethodOptions<object> Return(object objToReturn)
     {
         throw new RhinoMockWrapperException("Stubbing return value for Action is not supported.");
