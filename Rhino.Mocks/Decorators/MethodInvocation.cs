@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Moq;
 
-namespace Rhino.Mocks;
+namespace Rhino.Mocks.Decorators;
 
 public sealed class MethodInvocation
 {

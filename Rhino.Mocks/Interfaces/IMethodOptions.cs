@@ -1,4 +1,6 @@
-﻿namespace Rhino.Mocks.Interfaces;
+﻿using Rhino.Mocks.Decorators;
+
+namespace Rhino.Mocks.Interfaces;
 
 public interface IMethodOptions<T>
 {

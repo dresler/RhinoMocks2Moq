@@ -13,9 +13,9 @@ internal interface IMockDecorator<T> : INonTypedMockDecorator
 {
     Mock<T> Mock { get; }
 
-    IMockSetupDecorator<T, TResult> Setup<TResult>(Expression<Func<T, TResult>> expression);
+    IMethodSetupDecorator<T, TResult> Setup<TResult>(Expression<Func<T, TResult>> expression);
 
-    IMockSetupDecorator<T, object> Setup(Expression<Action<T>> expression);
+    IMethodSetupDecorator<T, object> Setup(Expression<Action<T>> expression);
 
-    IList<IMockSetupDecorator<T>> Setups { get; }
+    IList<IMethodSetupDecorator<T>> Setups { get; }
 }

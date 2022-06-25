@@ -1,4 +1,4 @@
-﻿namespace Rhino.Mocks;
+﻿namespace Rhino.Mocks.Exceptions;
 
 public sealed class RhinoMockWrapperException : Exception
 {

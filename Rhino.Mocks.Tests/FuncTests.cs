@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Rhino.Mocks.Tests;
 
 [TestFixture]
-internal sealed class RhinoMockExtensionsTests
+internal sealed class FuncTests
 {
     private IBar _barMock = null!;
     private Foo _foo = null!;
@@ -44,52 +44,34 @@ internal sealed class RhinoMockExtensionsTests
     }
 
     [Test]
-    public void Expect_ForActionThatHasBeenCalledAsExpected_ShouldBehaveAsExpected()
+    public void Expect_ForFuncWithArgAndIgnoredArguments_ShouldBehaveAsExpected()
     {
-        _barMock.Expect(x => x.Action());
+        var argument = AnyValueFactory.CreateAnyString();
 
-        _foo.BarAction();
+        _barMock
+            .Expect(x => x.FuncWithArg<string, string>(null!))
+            .IgnoreArguments();
+
+        _foo.BarFuncWithArg<string, string>(argument);
 
         _barMock.VerifyAllExpectations();
     }
 
     [Test]
-    public void Expect_ForActionThatHasNotBeenCalledAsExpected_ShouldFail()
-    {
-        _barMock.Expect(x => x.Action());
-
-        Assert.Throws<MockException>(() => _barMock.VerifyAllExpectations());
-    }
-
-    [Test]
-    public void Expect_ForActionWithArgAndIgnoredArguments_ShouldBehaveAsExpected()
+    public void Expect_ForFuncWithArgAndWhenCalledAndIgnoredArguments_ShouldBehaveAsExpected()
     {
         var argument = AnyValueFactory.CreateAnyString();
 
-        _barMock
-            .Expect(x => x.ActionWithArg<string>(null!))
-            .IgnoreArguments();
-
-        _foo.BarActionWithArg(argument);
-
-        _barMock.VerifyAllExpectations();
-    }
-    
-    [Test]
-    public void Expect_ForActionWithArgAndWhenCalledAndIgnoredArguments_ShouldBehaveAsExpected()
-    {
-        var argument = AnyValueFactory.CreateAnyString();
-
-        var actionCalled = false;
+        var funcCalled = false;
 
         _barMock
-            .Expect(x => x.ActionWithArg<string>(null!))
-            .WhenCalled(_ => actionCalled = true)
+            .Expect(x => x.FuncWithArg<string, string>(null!))
+            .WhenCalled(_ => funcCalled = true)
             .IgnoreArguments();
 
-        _foo.BarActionWithArg(argument);
+        _foo.BarFuncWithArg<string, string>(argument);
 
-        Assert.IsTrue(actionCalled);
+        Assert.IsTrue(funcCalled);
     }
 
     [Test]
@@ -142,30 +124,6 @@ internal sealed class RhinoMockExtensionsTests
         Assert.AreEqual(expectedException, actualException);
     }
 
-    [Test]
-    public void Stub_ForActionAndWhenCalled_ShouldBehaveAsExpected()
-    {
-        var actionCalled = false;
-
-        _barMock.Stub(x => x.Action()).WhenCalled(_ => actionCalled = true);
-
-        _foo.BarAction();
-
-        Assert.IsTrue(actionCalled);
-    }
-
-    [Test]
-    public void Stub_ForActionThrowingException_ShouldBehaveAsExpected()
-    {
-        var expectedException = new Exception();
-
-        _barMock.Stub(x => x.Action()).Throw(expectedException);
-
-        var actualException = Assert.Throws<Exception>(_foo.BarAction);
-
-        Assert.AreEqual(expectedException, actualException);
-    }
-
     internal class Foo
     {
         private readonly IBar _bar;
@@ -178,10 +136,6 @@ internal sealed class RhinoMockExtensionsTests
         public TResult BarFunc<TResult>() => _bar.Func<TResult>();
 
         public TResult BarFuncWithArg<TArgument, TResult>(TArgument arg) => _bar.FuncWithArg<TArgument, TResult>(arg);
-            
-        public void BarAction() => _bar.Action();
-        
-        public void BarActionWithArg<TArgument>(TArgument arg) => _bar.ActionWithArg(arg);
     }
 
     internal interface IBar
@@ -189,9 +143,5 @@ internal sealed class RhinoMockExtensionsTests
         TResult Func<TResult>();
             
         TResult FuncWithArg<TArgument, TResult>(TArgument arg);
-
-        void Action();
-        
-        void ActionWithArg<TArgument>(TArgument arg);
     }
 }

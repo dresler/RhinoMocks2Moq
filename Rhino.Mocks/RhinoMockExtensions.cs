@@ -1,11 +1,12 @@
 ﻿using System.Linq.Expressions;
+using Rhino.Mocks.Exceptions;
 using Rhino.Mocks.Interfaces;
 
 namespace Rhino.Mocks;
 
 public static class RhinoMockExtensions
 {
-    public static IMethodOptions<R> Expect<T, R>(this T mock, Expression<Func<T, R>> func)
+    public static IMethodOptions<TResult> Expect<T, TResult>(this T mock, Expression<Func<T, TResult>> func)
         where T : class
     {
         var mockDecorator = mock.GetMockDecorator();
@@ -21,7 +22,7 @@ public static class RhinoMockExtensions
         return setup.Verifiable();
     }
 
-    public static IMethodOptions<R> Stub<T, R>(this T mock, Expression<Func<T, R>> func)
+    public static IMethodOptions<TResult> Stub<T, TResult>(this T mock, Expression<Func<T, TResult>> func)
         where T : class
     {
         var mockDecorator = mock.GetMockDecorator();
