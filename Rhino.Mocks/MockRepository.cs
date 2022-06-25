@@ -11,7 +11,10 @@ public class MockRepository
             throw new RhinoMockWrapperException($"{nameof(argumentsForConstructor)} are not supported.");
 
         var mock = new Mock<T>();
-        
+
+        var nonTypedMockProvider = mock.As<INonTypedMockProvider>();
+        nonTypedMockProvider.Setup(x => x.Mock).Returns(mock);
+
         var mockProvider = mock.As<IMockProvider<T>>();
         mockProvider.Setup(x => x.Mock).Returns(mock);
 
