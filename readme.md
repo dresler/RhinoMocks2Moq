@@ -33,6 +33,11 @@ mock
 ```
 ```
 mock
+  .Stub(m => m.Property)
+  .Returns(...)
+```
+```
+mock
   .Stub(m => m.Method(...))
   .Throws(...)
 ```
