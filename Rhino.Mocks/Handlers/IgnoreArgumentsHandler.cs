@@ -10,6 +10,7 @@ internal static class IgnoreArgumentsHandler
         where T : class
     {
         // Replace all setup calls by a call with replacing it with an always matching setup
+        // Inspiration from https://gist.github.com/davidvesely/198fcc2e99cff7ed0f5d.
         var expressionIgnoringArguments = new MakeAnyVisitor().VisitAndConvert(expression, nameof(IgnoreArgumentsHandler));
 
         var mockDecorator = mock.Object.GetMockDecorator();
